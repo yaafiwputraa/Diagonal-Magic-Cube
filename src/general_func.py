@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 MAGIC_SUM = 315
 
+
 def generate_cube():
     numbers = list(range(1, 126))
     random.shuffle(numbers)
@@ -45,7 +46,16 @@ def calculate_deviation(cube):
     
     return total_deviation
 
-def plot_deviation(iterations, deviations): #jd hrs nyimpen iterasi n deviasinya waktu ngeiterate
+def evaluate(cube_initial, cube_final, final_obj, duration):
+    # Print evaluation results
+    print("Initial State:")
+    print(cube_initial)
+    print("\nFinal State:")
+    print(cube_final)
+    print(f"\nFinal Obj Func: {final_obj}")
+    print(f"Duration: {duration:.3f} s")
+
+def plot_deviation(iterations, deviations):
     plt.figure(figsize=(10, 5))
     plt.plot(iterations, deviations, label='Current Deviation', color='blue')
     plt.xlabel('Iteration')
