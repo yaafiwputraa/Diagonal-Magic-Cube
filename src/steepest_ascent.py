@@ -51,7 +51,7 @@ def steepest_ascent_hill_climbing(max_iterations=1000):
             print("Perfect magic cube found!")
             break
             
-        iteration += 1 #menaikkan iterasi
+        iteration += 1 # menambah iterasi
     
     duration = time.time() - start_time
     
