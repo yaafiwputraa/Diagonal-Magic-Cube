@@ -47,7 +47,6 @@ def calculate_deviation(cube):
     return total_deviation
 
 def evaluate(cube_initial, cube_final, final_obj, duration):
-    # Print evaluation results
     print("Initial State:")
     print(cube_initial)
     print("\nFinal State:")
@@ -55,12 +54,28 @@ def evaluate(cube_initial, cube_final, final_obj, duration):
     print(f"\nFinal Obj Func: {final_obj}")
     print(f"Duration: {duration:.3f} s")
 
-def plot_deviation(iterations, deviations):
+def plot_deviation(iterations, deviations, entropies=None):
     plt.figure(figsize=(10, 5))
+
+    # deviasi
+    plt.subplot(2, 1, 1)
     plt.plot(iterations, deviations, label='Current Deviation', color='blue')
     plt.xlabel('Iteration')
     plt.ylabel('Deviation')
-    plt.title('Plot nilai objective function terhadap banyak iterasi yang telah dilewati')
+    plt.title('Plot nilai objective function terhadap banyak iterasi yang telah dilewati')    
     plt.legend()
     plt.grid()
+
+    # buat SA
+    if entropies is not None:
+        plt.subplot(2, 1, 2) 
+        plt.plot(iterations, entropies, label='e^(Delta E/T)', color='orange')
+        plt.yscale('log')  #make logarithmic jauh lebih ngegambarin
+        plt.xlabel('Iteration')
+        plt.ylabel('e^(Delta E/T)')
+        plt.title('Plot nilai entropi(e^(Delta E/T)) terhadap banyak iterasi yang telah dilewati')    
+        plt.legend()
+        plt.grid()
+
+    plt.tight_layout()  
     plt.show()
