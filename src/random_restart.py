@@ -42,7 +42,7 @@ def random_restart_hill_climbing(max_iterations=1000, max_restart=5):
             best_neighbor_deviation = current_deviation
             
             # loop untuk mendapat nilai tetangga yang lebih baik 
-            for _ in range(max_iterations):
+            for i in range(max_iterations):
                 neighbor_cube = generate_neighbor(current_cube)
                 neighbor_deviation = calculate_deviation(neighbor_cube)
                 
