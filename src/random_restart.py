@@ -79,7 +79,7 @@ def random_restart_hill_climbing(max_iterations=1000, max_restart=5):
                 
                 # Memberikan output dari search yang telah dilakukan
                 print("\nSearch Summary:")
-                print(f"Number of restarts: {restart_count}")  # Not counting first attempt
+                print(f"Number of restarts: {restart_count}")  # Tidak menghitung initial attempt
                 print("Initial attempt:", attempt_iterations[0], "iterations")
                 if len(attempt_iterations) > 1:
                     print("Iterations per restart:", attempt_iterations[1:])
