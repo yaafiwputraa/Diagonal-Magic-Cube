@@ -19,8 +19,8 @@ def mutate(cube):
     return cube
 
 def genetic_algorithm(population_size, max_iterations):
-    initial_cube = generate_cube() 
-    current_deviation = calculate_deviation(initial_cube)
+    cube_initial = generate_cube() 
+    current_deviation = calculate_deviation(cube_initial)
 
     def generate_initial_population(population_size):
         population = []
@@ -59,18 +59,18 @@ def genetic_algorithm(population_size, max_iterations):
     end_time = time.time()
 
     final_population_scores = [calculate_deviation(cube) for cube in population]
-    best_cube = population[np.argmin(final_population_scores)]
-    print(best_cube)
+    cube_final = population[np.argmin(final_population_scores)]
+    print(cube_final)
 
     print(f"Initial Objective Function Value: {current_deviation}")
     print(f"Final Objective Function Value: {min(final_population_scores)}")
     print(f"Duration: {end_time - start_time} seconds")
-    return best_cube, best_scores, avg_scores, end_time - start_time
+    return cube_final, best_scores, avg_scores, end_time - start_time
 
 
 def run_GA():
-    population_sizes = [10,50,100]
-    iteration_counts = [100,500,1000]
+    population_sizes = []
+    iteration_counts = []
     for i in range(3):
         pop_size = int(input(f"Enter population size {i + 1}: "))
         population_sizes.append(pop_size)
