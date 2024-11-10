@@ -34,6 +34,7 @@ def hill_climbing_with_sideways(max_iterations=1000, max_sideways=100):
                 best_neighbor = neighbor_cube
                 best_neighbor_deviation = neighbor_deviation
             elif neighbor_deviation == best_neighbor_deviation: #kondisi untuk bergerak sideways di mana nilai neighbor sama
+                best_neighbor = neighbor_cube
                 sideways_moves += 1
                 if sideways_moves >= max_sideways:
                     print(f"Maximum number of sideways moves reached at iteration {iteration}")
