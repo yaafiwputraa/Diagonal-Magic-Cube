@@ -71,4 +71,4 @@ def hill_climbing_with_sideways(max_iterations=1000, max_sideways=100):
     return current_cube, current_deviation
 
 # menjalankan algoritma 
-hill_climbing_with_sideways()
+# hill_climbing_with_sideways()

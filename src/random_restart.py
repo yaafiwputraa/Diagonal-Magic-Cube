@@ -119,4 +119,4 @@ def random_restart_hill_climbing(max_iterations=1000, max_restart=5):
     return best_cube, best_deviation
 
 # menjalankan algoritma 
-random_restart_hill_climbing()
+# random_restart_hill_climbing()

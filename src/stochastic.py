@@ -65,4 +65,4 @@ def stochastic_hill_climbing(max_iterations=1000):
     return current_cube, current_deviation
 
 # menjalankan algoritma 
-stochastic_hill_climbing()
+# stochastic_hill_climbing()
