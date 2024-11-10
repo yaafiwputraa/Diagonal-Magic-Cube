@@ -96,7 +96,6 @@ def random_restart_hill_climbing(max_iterations=1000, max_restart=5):
             local_iterations += 1
             total_iterations += 1
             
-        # Record iterations for this attempt
         attempt_iterations.append(local_iterations)
         restart_count += 1
         
