@@ -57,51 +57,103 @@ def genetic_algorithm(population_size, max_iterations):
         population = selected + new_population
 
     end_time = time.time()
+    duration = end_time - start_time
 
+    
     final_population_scores = [calculate_deviation(cube) for cube in population]
-    cube_final = population[np.argmin(final_population_scores)]
-    print(cube_final)
+    best_idx = np.argmin(final_population_scores)
+    cube_final = population[best_idx]
+    final_score = final_population_scores[best_idx]
 
-    print(f"Initial Objective Function Value: {current_deviation}")
-    print(f"Final Objective Function Value: {min(final_population_scores)}")
-    print(f"Duration: {end_time - start_time} seconds")
-    return cube_final, best_scores, avg_scores, end_time - start_time
-
+    
+    print("\n" + "="*50)
+    print("RESULTS")
+    print("="*50)
+    
+    # Print initial state
+    print("\nINITIAL STATE:")
+    print("-"*20)
+    for i in range(5):
+        print(f"\nLayer {i+1}:")
+        print(np.array2string(cube_initial[i], separator=' ', precision=2))
+    print(f"\nInitial Objective Function Value: {current_deviation}")
+    
+    # Print final state
+    print("\nFINAL STATE:")
+    print("-"*20)
+    for i in range(5):
+        print(f"\nLayer {i+1}:")
+        print(np.array2string(cube_final[i], separator=' ', precision=2))
+    print(f"\nFinal Objective Function Value: {final_score}")
+    
+    print(f"\nDuration: {duration:.2f} seconds")
+    print("="*50)
+    
+    return cube_initial, cube_final, best_scores, avg_scores, duration, final_score
 
 def run_GA():
+    print("=== Setup Percobaan ===")
     population_sizes = []
     iteration_counts = []
     for i in range(3):
-        pop_size = int(input(f"Enter population size {i + 1}: "))
+        pop_size = int(input(f"Varian Populasi {i + 1}: "))
         population_sizes.append(pop_size)
     for i in range(3):
-        iter_count = int(input(f"Enter iteration count {i + 1}: "))
+        iter_count = int(input(f"Varian Iterasi {i + 1}: "))
         iteration_counts.append(iter_count)
 
+    
+    CONTROL_ITERATIONS = 1000 # iterasi yg di control
+    print("\n=== Experiment 1: Coba varian populasi ===")
+    print(f"Iterasi yang di kontrol : {CONTROL_ITERATIONS}")
+    print(f"varian populasi         : {population_sizes}")
+    
     for pop_size in population_sizes:
+        print(f"\nJumlah Populasi yang dites: {pop_size}")
         for run in range(3):
-            print(f"Run {run + 1} with population size: {pop_size}")
-            cube, best_scores, avg_scores, duration = genetic_algorithm(pop_size, 1000)
-            plt.plot(best_scores, label=f'Best - Pop {pop_size} (Run {run + 1})')
-            plt.plot(avg_scores, label=f'Average - Pop {pop_size} (Run {run + 1})')
+            print(f"\n{'-'*50}")
+            print(f"Run {run + 1}/3 ukuran populasi: {pop_size}")
+            print(f"{'-'*50}")
+            
+            cube_initial, cube_final, best_scores, avg_scores, duration, final_score = \
+                genetic_algorithm(pop_size, CONTROL_ITERATIONS)
+            
+            
+            plt.figure(figsize=(10, 6))
+            plt.plot(best_scores, label='Best Scores')
+            plt.plot(avg_scores, label='Average Scores')
             plt.xlabel('Iterations')
             plt.ylabel('Objective Function Value')
-            plt.title(f'Performance with Population Size {pop_size}')
+            plt.title(f'Plot nilai objective function terhadap banyak iterasi yang telah dilewati (Populasi) {pop_size} (Run {run + 1})')
             plt.grid(True)
             plt.legend()
             plt.show()
 
+    
+    CONTROL_POPULATION = 50 # populasi yg di control
+    print("\n=== Experiment 2: Coba varian iterasi ===")
+    print(f"Populasi yang di kontrol: {CONTROL_POPULATION}")
+    print(f"Varian Iterasi          : {iteration_counts}")
+    
     for iteration_count in iteration_counts:
+        print(f"\nJumlah Iterasi yang di test: {iteration_count}")
         for run in range(3):
-            print(f"Run {run + 1} with iteration count: {iteration_count}")
-            cube, best_scores, avg_scores, duration = genetic_algorithm(50, iteration_count)
-            plt.plot(best_scores, label=f'Best - Iter {iteration_count} (Run {run + 1})')
-            plt.plot(avg_scores, label=f'Average - Iter {iteration_count} (Run {run + 1})')
+            print(f"\n{'-'*50}")
+            print(f"Run {run + 1}/3 with jumlah iterasi {iteration_count}")
+            print(f"{'-'*50}")
+            
+            cube_initial, cube_final, best_scores, avg_scores, duration, final_score = \
+                genetic_algorithm(CONTROL_POPULATION, iteration_count)
+            
+            
+            plt.figure(figsize=(10, 6))
+            plt.plot(best_scores, label='Best Scores')
+            plt.plot(avg_scores, label='Average Scores')
             plt.xlabel('Iterations')
             plt.ylabel('Objective Function Value')
-            plt.title(f'Performance with Iteration Count {iteration_count}')
+            plt.title(f'Plot nilai objective function terhadap banyak iterasi yang telah dilewati (Iterasi) {iteration_count} (Run {run + 1})')
             plt.grid(True)
             plt.legend()
             plt.show()
 
-
+run_GA()
