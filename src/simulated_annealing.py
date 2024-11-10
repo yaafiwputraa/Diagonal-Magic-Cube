@@ -4,9 +4,9 @@ import time
 from general_func import * 
 
 MAGIC_SUM = 315
-MAX_ITERATIONS = 50000
-INITIAL_TEMPERATURE = 100 #ini yg krusial buat diganti2
-COOLING_RATE = 0.9999 #ini yg krusial buat diganti2
+MAX_ITERATIONS = 70000
+INITIAL_TEMPERATURE = 1000 #ini yg krusial buat diganti2
+COOLING_RATE = 0.99995 #ini yg krusial buat diganti2
 
 
 def simulated_annealing():
@@ -30,20 +30,22 @@ def simulated_annealing():
         neighbor_cube = generate_neighbor(current_cube)
         neighbor_deviation = calculate_deviation(neighbor_cube)
         
+        
         delta_e = current_deviation-neighbor_deviation
+        
         
         entropy = math.exp(delta_e / temperature)
         entropies.append(entropy)
 
         if neighbor_deviation < current_deviation or random.random() < entropy:
+            if neighbor_deviation >= current_deviation:
+                stuck_count += 1 
             current_cube = neighbor_cube # ^ klo deviationnya worse masi ada kemungkinan untuk pindah ke neighbornya
             current_deviation = neighbor_deviation
 
             if current_deviation < best_deviation:
                 best_cube = np.copy(current_cube)
                 best_deviation = current_deviation
-        else:
-            stuck_count += 1
                 
                 
         #simpen
@@ -57,7 +59,7 @@ def simulated_annealing():
             print("Perfect magic cube found!")
             break        
 
-        # Print progress every second
+        # setiap 1000 iterasi print deviasi
         if iteration % 1000 == 0:
             print(f"Iteration {iteration}: Current deviation = {current_deviation}")
             
@@ -68,4 +70,4 @@ def simulated_annealing():
     print(f"'stuck' in local optimum: {stuck_count}")
     plot_deviation(iterations, deviations, entropies)
     
-# simulated_annealing()
+simulated_annealing()
