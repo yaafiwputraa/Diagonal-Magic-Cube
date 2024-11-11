@@ -49,9 +49,19 @@ def genetic_algorithm(population_size, max_iterations):
         for _ in range(population_size // 2):
             idx1, idx2 = np.random.choice(len(selected), 2, replace=False)
             parent1, parent2 = selected[idx1], selected[idx2]
-            child = crossover(parent1, parent2)
+            
+            for attempt in range(5):
+                child = crossover(parent1, parent2)
+                if not np.array_equal(child, parent1) and not np.array_equal(child, parent2):#agar child tidak sama dengan parent 1 atau 2
+                    break
+                else:
+                    child = mutate(child)
+            
             if np.random.rand() < 0.2:  
                 child = mutate(child)
+                # cek apakah child sama dengan kedua parent
+                # if np.array_equal(child, parent1) or np.array_equal(child, parent2):
+                #     print("Warning: Child is identical to one of the parents.")
             new_population.append(child)
         
         population = selected + new_population
