@@ -70,4 +70,4 @@ def simulated_annealing():
     print(f"'stuck' in local optimum: {stuck_count}")
     plot_deviation(iterations, deviations, entropies)
     
-simulated_annealing()
+#simulated_annealing()
