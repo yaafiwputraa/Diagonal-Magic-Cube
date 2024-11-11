@@ -155,5 +155,3 @@ def run_GA():
             plt.grid(True)
             plt.legend()
             plt.show()
-
-run_GA()

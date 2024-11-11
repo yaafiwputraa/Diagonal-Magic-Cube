@@ -70,7 +70,7 @@ def plot_deviation(iterations, deviations, entropies=None):
     if entropies is not None:
         plt.subplot(2, 1, 2) 
         plt.plot(iterations, entropies, label='e^(Delta E/T)', color='orange')
-        plt.yscale('log')  #make logarithmic jauh lebih ngegambarin
+        plt.yscale('log')  #pakai logarithmic jauh lebih ngegambarin
         plt.xlabel('Iteration')
         plt.ylabel('e^(Delta E/T)')
         plt.title('Plot nilai entropi(e^(Delta E/T)) terhadap banyak iterasi yang telah dilewati')    
